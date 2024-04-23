@@ -9,16 +9,7 @@ services:
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:rw
       #- ./certs:/etc/mosquitto/certs:rw
-  influxdb:
-    image: influxdb:latest
-    ports:
-      - '8086:8086'
-    volumes:
-      - influxdb-storage:/mnt/shared/code/influxdb2
-    environment:
-      - INFLUXDB_DB=db0
-      - INFLUXDB_ADMIN_USER=xabitelle
-      - INFLUXDB_ADMIN_PASSWORD= MFONWOOCLCNRO
+
 
   telegraf:
     image: telegraf
@@ -26,7 +17,6 @@ services:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:rw
     depends_on:
       - mqtt-broker
-      - influxdb
 
 volumes:
   influxdb-storage:
