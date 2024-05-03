@@ -1,19 +1,54 @@
 import requests
+import json
 
-# Tu clave API de TomTom
-api_key = 'DHv0U5Sq8FHk54W0eNhVvcGwM7kwIS9r'
-# Coordenadas para el cuadro delimitador de Madrid, España
-bbox = '-3.888954,40.312064,-3.517916,40.643729'
-url = f"https://api.tomtom.com/traffic/services/4/incidentDetails?key={api_key}&bbox={bbox}&trafficModelID=0&format=json"
+# Definir la URL del endpoint
+url = "https://openweathermap.org/api/one-call-3/onecall"
 
-response = requests.get(url)
+# Definir los parámetros de la solicitud
+params = {
+    "lat": 30.489772,
+    "lon": 99.771335,
+    "appid": "f2c7227101062f8b180323eb31973383",  # Reemplazar con su clave API de OpenWeatherMap
+    "lang":"zh_cn",
+    "exclude": "current,minutely,hourly,alerts"  # Excluir datos que no se necesiten
 
-if response.status_code != 200:
-    print("Error en la solicitud: Código de estado", response.status_code)
-    print(response.text)  # Esto mostrará el mensaje de error de la API si hay uno
-    print(response.text)
+}
 
+# Enviar la solicitud GET al endpoint
+response = requests.get(url, params=params)
+
+# Verificar si la solicitud fue exitosa
+if response.status_code == 200:
+    # Convertir la respuesta JSON a un diccionario
+    data = json.loads(response.text)
+
+    # Acceder a los datos históricos
+    historical_data = data["daily"]
+
+    # Recorrer los datos históricos
+    for day in historical_data:
+        # Obtener la fecha
+        date = day["dt"]
+
+        # Obtener la temperatura máxima
+        temperature_max = day["temp"]["max"]
+
+        # Obtener la temperatura mínima
+        temperature_min = day["temp"]["min"]
+
+        # Obtener la presión atmosférica
+        pressure = day["pressure"]
+
+        # Obtener la humedad
+        humidity = day["humidity"]
+
+        # Imprimir los datos históricos
+        print(f"Fecha: {date}")
+        print(f"Temperatura máxima: {temperature_max} °C")
+        print(f"Temperatura mínima: {temperature_min} °C")
+        print(f"Presión atmosférica: {pressure} hPa")
+        print(f"Humedad: {humidity} %")
+        print("----------------")
 else:
-    traffic_data = response.json()
-
-print(traffic_data)
+    # Imprimir un mensaje de error si la solicitud no fue exitosa
+    print(f"Error: {response.status_code}")

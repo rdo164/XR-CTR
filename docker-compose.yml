@@ -5,19 +5,9 @@ services:
     image: eclipse-mosquitto
     container_name: mqtt-broker
     ports:
-      - "1883:1883"
+      - "8883:8883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:rw
-      #- ./certs:/etc/mosquitto/certs:rw
-
-
-  telegraf:
-    image: telegraf
-    volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:rw
-    depends_on:
-      - mqtt-broker
-
-volumes:
-  influxdb-storage:
+      - ./certs:/etc/mosquitto/certs:rw
+ 
   

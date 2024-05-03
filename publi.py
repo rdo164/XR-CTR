@@ -2,19 +2,20 @@ import re
 from typing import NamedTuple
 import paho.mqtt.client as mqtt
 import requests
-import os 
+import os
+import ssl
 
 # Los datos son insertados mediante el uso de InfluxDB API
-INFLUXDB_URL = "https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=f1237642dc0cea57&bucket=viento&precision=ns"
+INFLUXDB_URL = "https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=57b4981ce8369016&bucket=tiempo&precision=ns"
 
-INFLUXDB_TOKEN =  os.getenv("INFLUX_TOKEN")
+INFLUXDB_TOKEN = "l2lPe6vkpnQLEH32CZOPpJwCtOcZ87KEFMlseOaWMRxkzg7JmxHHOO5Dn2hyxtKhIDOWHviklPciuC9oOZslTQ=="
 HEADERS = {
     'Authorization': f'Token {INFLUXDB_TOKEN}',
     'Content-type': 'text/plain'
 }
 
 # Configuración de MQTT
-MQTT_ADDRESS = 'localhost'
+MQTT_ADDRESS = '192.168.208.2'
 
 #MQTT_USER = 'iotuser'
 #MQTT_PASSWORD = 'iotpassword'
@@ -54,10 +55,10 @@ def on_message(client, userdata, msg):
     if sensor_data is not None:
         _send_sensor_data_to_influxdb(sensor_data)
 
-# conversión de datos?¿?¿
+# conversión de datos
 def _parse_mqtt_message(topic, payload):
 
-    # podría ser la provincia MQTT_REGEX
+   
     match = re.match(MQTT_REGEX, topic)
     
     if match:
@@ -90,11 +91,11 @@ def main():
     # mqtt_client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
     mqtt_client.on_connect = on_connect
     mqtt_client.on_message = on_message
-
-    mqtt_client.connect(MQTT_ADDRESS, 1883)
+    mqtt_client.tls_set(ca_certs="./certs/ca.crt", certfile="./certs/cliente.crt", keyfile="./certs/cliente.key", tls_version=ssl.PROTOCOL_TLS)
+    mqtt_client.connect(MQTT_ADDRESS, 8883)
     mqtt_client.loop_forever()
 
 
 if __name__ == '__main__':
-    print('MQTT to InfluxDB bridge')
+    print('MQTT to InfluxDB puente')
     main()
