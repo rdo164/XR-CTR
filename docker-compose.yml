@@ -1,13 +1,21 @@
 version: '3'
 
+networks:
+  mqtt-net:
+    ipam:
+      config:
+      - subnet: 192.168.208.0/24
+        gateway: 192.168.208.1
+
 services:
   mqtt-broker:
     image: eclipse-mosquitto
     container_name: mqtt-broker
+    networks:
+      - mqtt-net
     ports:
       - "8883:8883"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:rw
       - ./certs:/etc/mosquitto/certs:rw
- 
   
