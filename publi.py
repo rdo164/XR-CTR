@@ -43,7 +43,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
         
         message = f'{20 + i * 0.5}'  # temperatura incremental
 
-        client.publish(topic, message)
+        client.publish(topic, message, qos=2)
 
 
 # suscriptor
