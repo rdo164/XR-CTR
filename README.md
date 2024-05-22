@@ -1,5 +1,17 @@
 # XR-CTR
 Proyecto final IoT
+Envio de datos mediante MQTT con certificados TLS/SSL
+
+Para asegurar que los IPs coincidan para el envío mediante certificados, es necesario verificar los siguientes puntos:
+- Creación de certificados en el apartado de SAN: Al generar los certificados, es necesario incluir las direcciones IP necesarias en el campo de Subject Alternative Name (SAN) para que coincidan con las direcciones IP utilizadas en tu configuración.
+
+Configuración en mosquitto.conf: En el archivo de configuración mosquitto.conf, especifica la dirección IP correcta en el apartado bind_address para que el servidor MQTT se enlace a la dirección IP deseada.
+
+Configuración en docker-compose: En docker-compose para desplegar Mosquitto, es necesario configurar correctamente las secciones de subnet(subred) y gateway(direccion IP concreta) para que coincidan con tu red y dirección IP.
+
+Configuración en el archivo .py: En el script Python publi.py donde publicamos los datos a través de MQTT, es necesario asegurarse de que la dirección IP utilizada en la variable MQTT_ADDRESS coincida con las direcciones IP configuradas en los pasos anteriores.
+
+
 
 Bibliografía
 
