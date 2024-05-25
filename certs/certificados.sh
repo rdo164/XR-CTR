@@ -30,7 +30,7 @@ crear_certificado_cliente() {
 crear_certificado_CA "ca"
 
 # Crear certificado de servido
-crear_certificado_server "server" "192.168.208.2"
+crear_certificado_server "server" "0.0.0.0"
 
 # Crear certificado de cliente
 crear_certificado_cliente "cliente" "192.168.208.2"
