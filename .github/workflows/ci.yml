@@ -36,4 +36,4 @@ jobs:
 
       - name: Build and deploy MkDocs site
         run: mkdocs gh-deploy --force
-        working-directory: documetacion
+        working-directory: documentacion
