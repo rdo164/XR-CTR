@@ -32,7 +32,7 @@ synthetic_data = create_synthetic_data(30)
 # Publicar los datos mediante MQTT
 for index, row in synthetic_data.iterrows():
     temperatura, tiempo, direccion_viento, velocidad_viento = row
-    topic = 'home/Portland/viento'
+    topic = 'home/NewYork/viento'
     message = f'Temperatura: {temperatura}, Tiempo: {tiempo}, Direccion_viento: {direccion_viento}, Velocidad_viento: {velocidad_viento}'
     publish.single(
         topic, 
