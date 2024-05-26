@@ -1,118 +1,95 @@
 # XR-CTR
-Proyecto final IoT
-Envio de datos mediante MQTT con certificados TLS/SSL
+# Tiempo en USA
 
-Para asegurar que los IPs coincidan para el envío mediante certificados, es necesario verificar los siguientes puntos:
-- Creación de certificados en el apartado de SAN: Al generar los certificados, es necesario incluir las direcciones IP necesarias en el campo de Subject Alternative Name (SAN) para que coincidan con las direcciones IP utilizadas en tu configuración.
+## Miembros del equipo
+- **Colaboradores:** Xabier Telleria Salegi, Rodrigo Ruiz-Cuevas
 
-Configuración en mosquitto.conf: En el archivo de configuración mosquitto.conf, especifica la dirección IP correcta en el apartado bind_address para que el servidor MQTT se enlace a la dirección IP deseada.
+## Explicación de los Pasos Seguidos
+Este proyecto tiene como objetivo conectar un broker MQTT con una base de datos InfluxDB para almacenar datos meteorológicos de diferentes ciudades de Estados Unidos y realizar análisis con Grafana. Se utilizan varios publicadores para enviar datos y un suscriptor para procesarlos y almacenarlos.
 
-Configuración en docker-compose: En docker-compose para desplegar Mosquitto, es necesario configurar correctamente las secciones de subnet(subred) y gateway(direccion IP concreta) para que coincidan con tu red y dirección IP.
+## Instrucciones de Uso
 
-Configuración en el archivo .py: En el script Python publi.py donde publicamos los datos a través de MQTT, es necesario asegurarse de que la dirección IP utilizada en la variable MQTT_ADDRESS coincida con las direcciones IP configuradas en los pasos anteriores.
+### Instalación
+1. Clonar el repositorio:
+
+``
+git clone https://github.com/rdo164/XR-CTR.git
+``
+
+2. Instalar las dependencias:
+
+``
+pip install -r requirements.txt
+``
+
+3. Generar los certificados
+   
+``
+cd certs
+``
+
+``
+dos2unix certificados.sh
+``
+
+``
+bash certificados.sh
+``
+
+## Ejecución
+Ejecución del subscritor
+
+``
+docker-compose up -d
+``
+
+``
+python3 subscritor.py
+``
+
+Publicar datos desde CSV
+
+``
+python3 Portland.py
+``
+
+``
+python3 Denver.py
+``
+
+``
+python3 Dallas.py
+``
+
+``
+python3 Seattle.py
+``
+
+``
+python3 LasVegas.py
+``
+
+Generar y Publicar Datos Sintéticos
+
+``
+python3 NewYork.py
+``
+
+## Posibles vías de mejora
+1. Implementar autenticación y autorización en Grafana para una mayor seguridad.
+2. Agregar más validaciones de datos para garantizar la integridad de la información.
+3. Optimizar el rendimiento del procesamiento de datos y el almacenamiento en la base de datos.
+4. Mejorar la documentación y los comentarios en el código para facilitar la comprensión y el mantenimiento.
+
+## Retos Encontrados
+1. Configuración adecuada de los certificados para la comunicación segura con el broker MQTT.
+2. Validación de los datos recibidos para garantizar su calidad y coherencia.
+3. Configuración de InfluxDB y Grafana para la correcta visualización y análisis de los datos.
+
+## Alternativas Posibles
+
+1. Utilizar otras bases de datos de series temporales como Prometheus o TimescaleDB en lugar de InfluxDB.
+2. Explorar diferentes opciones de visualización y análisis de datos además de Grafana, como Kibana o Superset.
 
 
 
-Bibliografía
-
-- Send Data via mqtt https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-mqtt.html
-
-```
-version: '3'
-
-services:
-  mqtt-broker:
-    image: eclipse-mosquitto
-    container_name: mqtt-broker
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro  # Ajusta la ruta del archivo de configuración si es necesario
-
-  influxdb:
-    image: influxdb:latest
-    volumes:
-      - influxdb-storage:/var/lib/influxdb  # Ruta donde se almacenarán los datos de InfluxDB
-    environment:
-      - INFLUXDB_DB=db0
-      - INFLUXDB_ADMIN_USER=xabitelle
-      - INFLUXDB_ADMIN_PASSWORD=MFONWOOCLCNRO  # Ajusta la contraseña del administrador de InfluxDB
-
-  telegraf:
-    image: telegraf
-    volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro  # Ajusta la ruta del archivo de configuración de Telegraf
-    depends_on:
-      - mqtt-broker
-      - influxdb
-
-volumes:
-  influxdb-storage:
-  
-```
-
-```
-home/room0/temperature b'20.0'    
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>  
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room1/temperature b'20.5'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>  
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room2/temperature b'21.0'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room3/temperature b'21.5'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room4/temperature b'22.0'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room5/temperature b'22.5'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-
-home/room6/temperature b'23.0'
-<html>
-<head><title>405 Not Allowed</title></head>
-<body>
-<center><h1>405 Not Allowed</h1></center>
-<hr><center>nginx/1.24.0</center>
-</body>
-</html>
-```
-Problemas
