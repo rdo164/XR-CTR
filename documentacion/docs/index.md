@@ -1,4 +1,4 @@
-# *Proyecto: Tiempo en USA*
+# *Proyecto: Sedes en USA*
 
 ## *Descripción*
 
