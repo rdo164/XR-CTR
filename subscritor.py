@@ -9,7 +9,7 @@ import pandas as pd
 import json
 from datetime import datetime
 
-INFLUXDB_URL = "https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=57b4981ce8369016&bucket=tiempo&precision=ns"
+INFLUXDB_URL = "https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=57b4981ce8369016&bucket=tiempo&precision=s"
 INFLUXDB_TOKEN = "l2lPe6vkpnQLEH32CZOPpJwCtOcZ87KEFMlseOaWMRxkzg7JmxHHOO5Dn2hyxtKhIDOWHviklPciuC9oOZslTQ=="
 HEADERS = {
     'Authorization': f'Token {INFLUXDB_TOKEN}',
@@ -45,10 +45,6 @@ def on_message(client, userdata, msg):
         if not _validate_data(sensor_data):
             print("Datos no válidos")
             return
-<<<<<<< HEAD
-=======
-
->>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd
         data = f'{sensor_data.measurement},location={sensor_data.location} Temperatura={sensor_data.Temperatura},Tiempo={sensor_data.Tiempo},Direccion_viento={sensor_data.Direccion_viento},Velocidad_viento={sensor_data.Velocidad_viento}'
         
         response = requests.post(INFLUXDB_URL, headers=HEADERS, data=data) #Enviamos datos a influxDB

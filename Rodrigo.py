@@ -7,8 +7,8 @@ from datetime import datetime
 
 # Configuración de certificados
 ca_cert = "./certs/ca.crt"
-client_cert = "./certs/Rodrigo.crt"
-client_key = "./certs/Rodrigo.key"
+client_cert = "./certs/NewYork.crt"
+client_key = "./certs/NewYork.key"
 
 # Crear datos sintéticos
 def create_synthetic_data(num_rows):

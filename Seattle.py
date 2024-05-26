@@ -5,13 +5,14 @@ import pandas as pd
 
 # Configuración de certificados
 ca_cert = "./certs/ca.crt"
-client_cert = "./certs/LasVegas.crt"
-client_key = "./certs/LasVegas.key"
+client_cert = "./certs/Seattle.crt"
+client_key = "./certs/Seattle.key"
 
-data = pd.read_csv("LVegas.csv")
+# Configuración de mensajes a publicar
+data = pd.read_csv("Seattle.csv")
 for index, row in data.head(30).iterrows():
     datetime,Temperatura,Tiempo,Direccion_viento,Velocidad_viento= row
     Temperatura = Temperatura -273
-    topic = f'home/LasVegas/viento'
+    topic = f'home/Seattle/viento'
     message = f'Temperatura: {Temperatura}, Tiempo: {Tiempo}, Direccion_viento: {Direccion_viento}, Velocidad_viento: {Velocidad_viento}'
-    publish.single(topic, message, hostname="0.0.0.0", qos=2, port=8883, tls={'ca_certs': ca_cert, 'certfile': client_cert, 'keyfile': client_key}, protocol=mqtt.MQTTv311)
+    publish.single(topic, message, hostname="0.0.0.0", port=8883, qos=2, tls={'ca_certs': ca_cert, 'certfile': client_cert, 'keyfile': client_key}, protocol=mqtt.MQTTv311)
