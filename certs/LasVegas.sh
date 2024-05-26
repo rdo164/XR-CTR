@@ -33,6 +33,10 @@ crear_certificado_CA "ca"
 crear_certificado_server "server" "0.0.0.0"
 
 # Crear certificado de cliente
+<<<<<<< HEAD:certs/LasVegas.sh
 crear_certificado_cliente "LasVegas" "192.168.208.2"
+=======
+crear_certificado_cliente "cliente" "192.168.208.2"
+>>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd:certs/certificados.sh
 
 echo "Todos los certificados han sido creados correctamente."

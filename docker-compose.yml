@@ -4,7 +4,11 @@ networks:
   mqtt-net:
     ipam:
       config:
+<<<<<<< HEAD
         - subnet: 192.168.208.0/24
+=======
+      - subnet: 192.168.208.0/24
+>>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd
 
 services:
   mqtt-broker:
@@ -18,6 +22,7 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:rw
       - ./certs:/etc/mosquitto/certs:rw
 
+<<<<<<< HEAD
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -33,3 +38,5 @@ services:
 volumes:
   grafana-data:
 
+=======
+>>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd

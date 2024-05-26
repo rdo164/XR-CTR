@@ -14,4 +14,8 @@ for index, row in data.head(30).iterrows():
     Temperatura = Temperatura -273
     topic = f'home/LasVegas/viento'
     message = f'Temperatura: {Temperatura}, Tiempo: {Tiempo}, Direccion_viento: {Direccion_viento}, Velocidad_viento: {Velocidad_viento}'
+<<<<<<< HEAD:LasVegas.py
     publish.single(topic, message, hostname="0.0.0.0", qos=2, port=8883, tls={'ca_certs': ca_cert, 'certfile': client_cert, 'keyfile': client_key}, protocol=mqtt.MQTTv311)
+=======
+    publish.single(topic, message, hostname="0.0.0.0", port=8883, tls={'ca_certs': ca_cert, 'certfile': client_cert, 'keyfile': client_key}, protocol=mqtt.MQTTv311)
+>>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd:publicador2.py

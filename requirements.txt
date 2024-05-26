@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 paho-mqtt==1.6.1
 requests==2.25.1
 pandas==1.2.4
 jsonschema==3.2.0
+=======
+dos2unix
+>>>>>>> 64e4fdcaec6381c094a720b569310d31413364cd
