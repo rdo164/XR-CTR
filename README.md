@@ -1,5 +1,6 @@
 # XR-CTR
-# Tiempo en USA
+# Sedes en USA
+Si quiere ver más sobre la documentación pulse [aquí](rdo164.github.io/XR-CTR/)
 
 ## Miembros del equipo
 - **Colaboradores:** Xabier Telleria Salegi, Rodrigo Ruiz-Cuevas
