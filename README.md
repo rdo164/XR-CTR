@@ -12,37 +12,38 @@ Este proyecto tiene como objetivo conectar un broker MQTT con una base de datos 
 ### Instalación
 1. Clonar el repositorio:
 
-```bash
+``
 git clone https://github.com/rdo164/XR-CTR.git
-
+``
 2. Instalar las dependencias:
 
-```bash
+``
 pip install -r requirements.txt
-
+``
 3. Generar los certificados
-```bash
+``
 cd certs
 dos2unix certificados.sh
 bash certificados.sh
-
+``
 ## Ejecución
 Ejecución del subscritor
-```bash
+``
 docker-compose up -d
 python3 subscritor.py
-
+``
 Publicar datos desde CSV
-```bash
+``
 python3 Portland.py
 python3 Denver.py
 python3 Dallas.py
 python3 Seattle.py
 python3 LasVegas.py
-
+``
 Generar y Publicar Datos Sintéticos
-```bash
+``
 python3 NewYork.py
+``
 
 ## Posibles vías de mejora
 1. Implementar autenticación y autorización en Grafana para una mayor seguridad.
