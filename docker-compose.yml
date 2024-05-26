@@ -4,8 +4,7 @@ networks:
   mqtt-net:
     ipam:
       config:
-      - subnet: 192.168.208.0/24
-        gateway: 192.168.208.1
+        - subnet: 192.168.208.0/24
 
 services:
   mqtt-broker:
@@ -18,4 +17,19 @@ services:
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:rw
       - ./certs:/etc/mosquitto/certs:rw
-  
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    networks:
+      - mqtt-net
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=XR-CTR1234  # Reemplaza con tu contraseña deseada
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  grafana-data:
+
