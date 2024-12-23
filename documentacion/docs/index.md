@@ -191,3 +191,4 @@ Configuración de Grafana:
 Data Source: Se ha configurado InfluxDB como una fuente de datos en Grafana, proporcionando las credenciales y la URL de conexión.
 
 Dashboards: Hemos creado dashboards específicos para visualizar los datos meteorológicos de cada ciudad. Cada dashboard puede incluir gráficos de series temporales para la temperatura, dirección del viento y velocidad del viento.
+
