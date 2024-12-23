@@ -9,7 +9,6 @@ Este proyecto busca facilitar el monitoreo de datos meteorológicos en tiempo re
 
 ## FASES
 ![](./assets/fases.png)
-Estas son las fases del proyecto.
 
 **1. Captura de datos**:
 ![](./assets/fase1.png)

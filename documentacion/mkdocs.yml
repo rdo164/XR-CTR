@@ -1,4 +1,5 @@
-site_name: My Docs
+site_name: Integración de IoT para Monitoreo Meteorológico con MQTT, InfluxDB y Grafana
+
 theme: 
   name: material
   palette:
