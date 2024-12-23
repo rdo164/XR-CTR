@@ -2,11 +2,7 @@ import re
 from typing import NamedTuple
 import paho.mqtt.client as mqtt
 import requests
-import os
-import csv
 import ssl
-import pandas as pd
-import json
 from datetime import datetime
 
 INFLUXDB_URL = "https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=57b4981ce8369016&bucket=tiempo&precision=s"
