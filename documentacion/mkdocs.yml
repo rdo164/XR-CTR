@@ -2,5 +2,22 @@ site_name: Integración de IoT para Monitoreo Meteorológico con MQTT, InfluxDB 
 
 theme: 
   name: material
+
+  features:
+    - navigation.tabs # se encarga de la navegación superior
+    - navigation.indexes
+    - content.code.copy
+    - code.conten.copy
+    - content.tabs.link
+    - navigation.footer # Genera los botones inferiores de la página web
+
   palette:
-    primary: black
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: light-blue
+        # color de links, a en html
+      accent: blue
